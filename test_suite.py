@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 
 from Action.Action_Page import ActionPage
+from config.configuration import Config
 
 
 @pytest.fixture(scope="module")
@@ -17,11 +18,11 @@ def driver_setup():
 def login(driver_setup):
     driver = driver_setup
     login_page = ActionPage(driver)
-    login_page.open_login_page("https://www.saucedemo.com/")
+    login_page.open_login_page(Config.BASE_URL)
     return login_page
 
 #Log in page
 def test_login_page_on_sauce_demo_website(login):
-    login.enter_username("visual_user")
-    login.enter_password("secret_sauce")
+    login.enter_username(Config.USERNAME)
+    login.enter_password(Config.PASSWORD)
     login.click_submit_button()
